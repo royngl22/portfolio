@@ -26,7 +26,7 @@ export const SkillStyle = () => {
     wrapper: {
       display: "flex",
       flexWrap: "wrap",
-      gap: "20px",
+      gap: "40px",
       justifyContent: "space-between",
 
       [theme.breakpoints.up("md")]: {
