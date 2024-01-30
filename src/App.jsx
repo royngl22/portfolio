@@ -1,9 +1,9 @@
-import React from "react";
-import NavBar from "./components/NavBar/NavBar";
-import Hero from "./pages/Hero/Hero";
-import About from "./pages/About/About";
-import Skills from "./pages/Skills/Skills";
-import Experience from "./pages/Experience/Experience";
+import React, { lazy } from "react";
+const NavBar = lazy(() => import("./components/NavBar/NavBar"));
+const Hero = lazy(() => import("./pages/Hero/Hero"));
+const About = lazy(() => import("./pages/About/About"));
+const Skills = lazy(() => import("./pages/Skills/Skills"));
+const Experience = lazy(() => import("./pages/Experience/Experience"));
 
 export default function App() {
   const date = new Date();

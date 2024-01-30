@@ -1,13 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <style>
+      .splash-svg {
+        width: 2.25em;
+        transform-origin: center;
+        animation: rotate4 2s linear infinite;
+      }
+
+      .splash-circle {
+        fill: none;
+        stroke: hsl(214, 97%, 59%);
+        stroke-width: 2;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: dash4 1.5s ease-in-out infinite;
+      }
+
+      @keyframes rotate4 {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash4 {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+
+        50% {
+          stroke-dasharray: 90, 200;
+          stroke-dashoffset: -35px;
+        }
+
+        100% {
+          stroke-dashoffset: -125px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <svg viewBox="25 25 50 50" class="splash-svg">
+        <circle r="20" cy="50" cx="50" class="splash-circle"></circle>
+      </svg>
+      <p>Your connection is slow. Please wait a moment...</p>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

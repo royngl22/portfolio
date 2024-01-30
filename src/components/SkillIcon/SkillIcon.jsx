@@ -1,10 +1,12 @@
-import React from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, useTheme, CircularProgress } from "@mui/material";
 import ContainerComp from "../ContainerComp/ContainerComp";
 import { StyledParagraph } from "../Typography/Typography";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function SkillIcon({ alt, src, label }) {
   const theme = useTheme();
+  const [loadingImg, setLoadingImg] = useState(true);
   return (
     <Box
       sx={{
@@ -35,10 +37,21 @@ export default function SkillIcon({ alt, src, label }) {
             width: "65px",
             height: "65px",
             overflow: "hidden",
+            position: "relative",
             // border: "1px solid red",
           }}
         >
-          <img src={src} alt={alt} width="100%" height="100%" />
+          {/* <img src={src} alt={alt} width="100%" height="100%" /> */}
+          {loadingImg && (
+            <CircularProgress sx={{ position: "absolute" }} size={20} />
+          )}
+          <LazyLoadImage
+            alt={alt}
+            height="100%"
+            src={src} // use normal <img> attributes as props
+            width="100%"
+            onLoad={() => setLoadingImg(!loadingImg)}
+          />
         </Box>
         <StyledParagraph textAlign={"center"}>{label}</StyledParagraph>
       </Box>

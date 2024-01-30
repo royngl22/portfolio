@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, lazy } from "react";
 import ContainerComp from "../../components/ContainerComp/ContainerComp";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import {
@@ -7,18 +7,24 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  CircularProgress,
 } from "@mui/material";
 import { ExperienceData } from "./Experience.Data";
 import { ExperienceStyle } from "./Experience.Style";
 import { FaArrowDown } from "react-icons/fa";
 import { StyledParagraph } from "../../components/Typography/Typography";
-import ExperienceDetail from "../../components/ExperienceDetail/ExperienceDetail";
+const ExperienceDetail = lazy(() =>
+  import("../../components/ExperienceDetail/ExperienceDetail")
+);
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import Skeleton from "@mui/material/Skeleton";
 
 export default function Experience() {
   const data = ExperienceData();
   const style = ExperienceStyle();
 
   const [expanded, setExpanded] = useState(false);
+  const [loadingImg, setLoadingImg] = useState(true);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -46,12 +52,24 @@ export default function Experience() {
                   id={`panel${idx}-header`}
                 >
                   <Box sx={style.header}>
-                    <Box>
-                      <img
+                    <Box
+                      sx={{
+                        position: "relative",
+                      }}
+                    >
+                      {loadingImg && (
+                        <CircularProgress
+                          sx={{ position: "absolute" }}
+                          size={20}
+                        />
+                      )}
+
+                      <LazyLoadImage
                         src={val.img_src}
                         alt={val.img_alt}
                         width={val.img_width}
                         height={val.img_height}
+                        onLoad={() => setLoadingImg(false)}
                       />
                     </Box>
 
